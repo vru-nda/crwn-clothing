@@ -5,6 +5,7 @@ import './App.css';
 
 import HomePage from './pages/Homepage/HomePage';
 import ShopPage from './pages/Shop/ShopPage';
+import AuthPage from './pages/authPage/AuthPage';
 import Header from './components/header/Header';
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/shop' component={ShopPage} />
+        <Route exact path='/signin' component={AuthPage} />
       </Switch>
     </div>
   );
