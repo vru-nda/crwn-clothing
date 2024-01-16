@@ -19,4 +19,14 @@
     color: black;
     border: 1px solid black;
   }
+
+  &.google-sigin {
+    background-color: #4285f4;
+    color: white;
+
+    &:hover {
+      background-color: #3571e8;
+      border: none;
+    }
+  }
 }

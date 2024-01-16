@@ -1,3 +1,5 @@
+import './sign-in.scss';
+
 import React, {Component} from 'react';
 
 import FormInput from '../form-input/FormInput';
@@ -47,10 +49,12 @@ export class SignIn extends Component {
             label='password'
             required
           />
-          <CustomButton type='submit'>Sign in</CustomButton>{' '}
-          <CustomButton onClick={signInWithGoogle}>
-            Sign in with Google
-          </CustomButton>
+          <div className='buttons'>
+            <CustomButton type='submit'>Sign in</CustomButton>
+            <CustomButton onClick={signInWithGoogle} isGoogleSignin>
+              Sign in with Google
+            </CustomButton>
+          </div>
         </form>
       </div>
     );
