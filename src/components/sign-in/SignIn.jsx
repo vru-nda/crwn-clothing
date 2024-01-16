@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import FormInput from '../form-input/FormInput';
 import CustomButton from '../customButton/CustomButton';
+
+import {signInWithGoogle} from '../../firebase/firebaseUtils';
 
 export class SignIn extends Component {
   constructor(props) {
@@ -14,13 +16,13 @@ export class SignIn extends Component {
   }
 
   handleChange = (e) => {
-    const { value, name } = e.target;
-    this.setState({ [name]: value });
+    const {value, name} = e.target;
+    this.setState({[name]: value});
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ name: '', email: '' });
+    this.setState({name: '', email: ''});
   };
 
   render() {
@@ -45,7 +47,10 @@ export class SignIn extends Component {
             label='password'
             required
           />
-          <CustomButton type='submit'>Sign in</CustomButton>
+          <CustomButton type='submit'>Sign in</CustomButton>{' '}
+          <CustomButton onClick={signInWithGoogle}>
+            Sign in with Google
+          </CustomButton>
         </form>
       </div>
     );
