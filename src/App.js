@@ -8,7 +8,7 @@ import HomePage from './pages/Homepage/HomePage';
 import ShopPage from './pages/Shop/ShopPage';
 import AuthPage from './pages/authPage/AuthPage';
 
-import {auth} from './firebase/firebaseUtils';
+import {auth, createUserProfileDocument} from './firebase/firebaseUtils';
 
 class App extends React.Component {
   constructor() {
@@ -20,10 +20,24 @@ class App extends React.Component {
 
   unsubscribeFromAuth = null;
 
-  // Last signed in user with google account with persistence (Subscription)
+  // Check for signed in user with google account
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({currentUser: user});
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        // check if the db updated
+        userRef.onSnapshot((snapshot) => {
+          this.setState({
+            currentUser: {
+              id: snapshot.id,
+              ...snapshot.data(),
+            },
+          });
+        });
+      } else {
+        this.setState({currentUser: userAuth});
+      }
     });
   }
 
@@ -31,7 +45,6 @@ class App extends React.Component {
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
-
   render() {
     return (
       <div className='App'>
