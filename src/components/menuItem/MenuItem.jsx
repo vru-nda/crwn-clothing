@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
-import './menu-item.scss';
+import './menuItem.scss';
 
 const MenuItem = ({ title, imageUrl, size, history, match, linkUrl }) => {
   return (
