@@ -15,18 +15,15 @@ const CartDropDown = ({cartItems, history, dispatch}) => {
   return (
     <div className='cart-dropdown'>
       <div className='cart-items'>
-        <div className='cart-items-wrapper'>
-          {cartItems.length ? (
-            cartItems.map((cartItem) => (
-              <CartItem key={cartItem.id} item={cartItem} />
-            ))
-          ) : (
-            <span className='empty-message'>Your cart is empty</span>
-          )}
-          {cartItems.map((item) => (
-            <CartItem key={item.id} cartItem={item} />
-          ))}
-        </div>
+        {cartItems.length ? (
+          cartItems.map((cartItem) => (
+            <div className='cart-items-wrapper'>
+              <CartItem key={cartItem.id} cartItem={cartItem} />
+            </div>
+          ))
+        ) : (
+          <span className='empty-message'>Your cart is empty</span>
+        )}
         <CustomButton
           onClick={() => {
             history.push('/checkout');
@@ -34,7 +31,7 @@ const CartDropDown = ({cartItems, history, dispatch}) => {
           }}
         >
           GO TO CHECKOUT
-        </CustomButton>{' '}
+        </CustomButton>
       </div>
     </div>
   );
