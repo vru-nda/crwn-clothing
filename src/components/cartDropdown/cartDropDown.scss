@@ -12,10 +12,15 @@
   z-index: 5;
 
   .cart-items {
-    height: 290px;
+    // height: 290px;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    gap: 10px;
+    // overflow: scroll;
+    .cart-items-wrapper {
+      overflow: auto;
+    }
   }
 
   button {
