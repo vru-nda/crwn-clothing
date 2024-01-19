@@ -17,7 +17,7 @@ const CartDropDown = ({cartItems, history, dispatch}) => {
       <div className='cart-items'>
         {cartItems.length ? (
           cartItems.map((cartItem) => (
-            <div className='cart-items-wrapper'>
+            <div key={cartItem.id} className='cart-items-wrapper'>
               <CartItem key={cartItem.id} cartItem={cartItem} />
             </div>
           ))
