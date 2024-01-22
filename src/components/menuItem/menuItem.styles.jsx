@@ -38,7 +38,7 @@ export const BackgroundImageContainer = styled.div`
   height: 100%;
   background-position: center;
   background-size: cover;
-  background-image: ${({imageUrl}) => `url(${imageUrl})`};
+  background-image: ${({imageurl}) => `url(${imageurl})`};
 `;
 
 export const ContentContainer = styled.div`

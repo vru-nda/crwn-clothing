@@ -16,20 +16,20 @@ const CollectionItem = ({item, addCartItem}) => {
   const {name, imageUrl, price} = item;
   return (
     <CollectionItemContainer>
-      <ImageContainer className='image' imageUrl={imageUrl} />
+      <ImageContainer className='image' imageurl={imageUrl} />
       <FooterContainer>
         <NameContainer>{name}</NameContainer>
         <PriceContainer>{price}</PriceContainer>
       </FooterContainer>
-      <AddButton inverted onClick={() => addCartItem(item)}>
+      <AddButton inverted='true' onClick={() => addCartItem(item)}>
         ADD TO CART
       </AddButton>
     </CollectionItemContainer>
   );
 };
 
-const mapStateToDispatch = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   addCartItem: (item) => dispatch(addCartItem(item)),
 });
 
-export default connect(null, mapStateToDispatch)(CollectionItem);
+export default connect(null, mapDispatchToProps)(CollectionItem);

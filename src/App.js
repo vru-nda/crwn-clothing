@@ -12,17 +12,22 @@ import CheckoutPage from './pages/checkout/Checkout';
 import Contact from './pages/contact/Contact';
 import Header from './components/header/Header';
 
-import {auth, createUserProfileDocument} from './firebase/firebaseUtils';
+import {
+  addCollectionAndDocuments,
+  auth,
+  createUserProfileDocument,
+} from './firebase/firebaseUtils';
 
 import {setCurrentUser} from './redux/user/userActions';
 import {selectCurrentUser} from './redux/user/userSelectors';
+import {selectCollectionsForPreview} from './redux/shop/shopSelector';
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   // Check for signed in user with google account
   componentDidMount() {
-    const {setCurrentUser} = this.props;
+    const {setCurrentUser, collections} = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -36,6 +41,12 @@ class App extends React.Component {
         });
       } else {
         setCurrentUser(userAuth);
+
+        // Add shopData to DB
+        // const data = await addCollectionAndDocuments(
+        //   'collections',
+        //   collections
+        // );
       }
     });
   }
@@ -69,6 +80,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  collections: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = (dispatch) => ({

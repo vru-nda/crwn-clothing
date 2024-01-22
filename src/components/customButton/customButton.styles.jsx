@@ -38,7 +38,7 @@ const getButtonStyles = (props) => {
   if (props.isGoogleSignin) {
     return GoogleSigninStyles;
   }
-  return props.inverted ? InvertedButtonStyles : ButtonStyles;
+  return props.inverted === 'true' ? InvertedButtonStyles : ButtonStyles;
 };
 
 export const CustomButtonContainer = styled.button`

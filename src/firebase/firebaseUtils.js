@@ -12,6 +12,9 @@ const config = {
   measurementId: 'G-RYNFFGDB0S',
 };
 
+firebase.initializeApp(config);
+
+// Creat a user profile in DB
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -34,7 +37,42 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-firebase.initializeApp(config);
+// Add Data to DB
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
+};
+
+// Convert the data to map structure
+export const convertCollectionSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const {title, items} = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  // ccreate the structured shopdata object
+  return transformedCollection.reduce((acc, collection) => {
+    acc[collection.title.toLowerCase()] = collection;
+    return acc;
+  }, {});
+};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
@@ -42,7 +80,6 @@ export const firestore = firebase.firestore();
 // Google signin
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({prompt: 'select_account'});
-
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export default firebase;
