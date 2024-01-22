@@ -1,44 +1,50 @@
-import './checkout.scss';
-
 import React from 'react';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 
 import CheckoutItem from '../../components/checkoutItem/CheckoutItem';
-import {selectCartItems, selectCartTotal} from '../../redux/cart/cartSelectors';
 import StripeButton from '../../components/stripeButton/StripeButton';
+import {selectCartItems, selectCartTotal} from '../../redux/cart/cartSelectors';
+
+import {
+  CheckoutHeaderContainer,
+  CheckoutPageContainer,
+  HeaderBlockContainer,
+  TotalContainer,
+  WarningContainer,
+} from './checkout.styles';
 
 const CheckoutPage = ({cartItems, total}) => {
   return (
-    <div className='checkout-page'>
-      <div className='checkout-header'>
-        <div className='header-block'>
+    <CheckoutPageContainer>
+      <CheckoutHeaderContainer>
+        <HeaderBlockContainer>
           <span>Product</span>
-        </div>
-        <div className='header-block'>
+        </HeaderBlockContainer>
+        <HeaderBlockContainer>
           <span>Description</span>
-        </div>
-        <div className='header-block'>
+        </HeaderBlockContainer>
+        <HeaderBlockContainer>
           <span>Quantity</span>
-        </div>
-        <div className='header-block'>
+        </HeaderBlockContainer>
+        <HeaderBlockContainer>
           <span>Price</span>
-        </div>
-        <div className='header-block'>
+        </HeaderBlockContainer>
+        <HeaderBlockContainer>
           <span>Remove</span>
-        </div>
-      </div>
+        </HeaderBlockContainer>
+      </CheckoutHeaderContainer>
       {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
-      <div className='total'>TOTAL: ${total}</div>
-      <div className='test-warning'>
+      <TotalContainer>TOTAL: ${total}</TotalContainer>
+      <WarningContainer>
         *Please use the following test credit card details for payments*
         <br />
         4242 4242 4242 4242 / any future data / any three digits
-      </div>
+      </WarningContainer>
       <StripeButton price={total} />
-    </div>
+    </CheckoutPageContainer>
   );
 };
 
