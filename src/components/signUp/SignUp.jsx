@@ -1,34 +1,29 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 
 import CustomButton from '../customButton/CustomButton';
 import FormInput from '../formInput/FormInput';
 
+import {connect} from 'react-redux';
 import {signUpStart} from '../../redux/user/userActions';
 import {SignUpContainer, TitleContainer} from './signUp.styles';
-import {connect} from 'react-redux';
 
-class SignUp extends Component {
-  constructor() {
-    super();
+const SignUp = ({signUpStart}) => {
+  const [userCreds, setUserCreds] = useState({
+    displayName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
-    this.state = {
-      displayName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    };
-  }
+  const {displayName, email, password, confirmPassword} = userCreds;
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     const {value, name} = e.target;
-    this.setState({[name]: value});
+    setUserCreds({...userCreds, [name]: value});
   };
 
-  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const {signUpStart} = this.props;
-    const {displayName, email, password, confirmPassword} = this.state;
 
     if (password !== confirmPassword) {
       alert("Passwords don't match!");
@@ -37,52 +32,50 @@ class SignUp extends Component {
     signUpStart({displayName, email, password});
   };
 
-  render() {
-    return (
-      <SignUpContainer>
-        <TitleContainer>I do not have an account.</TitleContainer>
-        <span>Sign up with your email and password</span>
-        <form onSubmit={this.handleSubmit}>
-          <FormInput
-            type='text'
-            name='displayName'
-            value={this.state.displayName}
-            handleChange={this.handleChange}
-            label='Display Name'
-            required
-          />
-          <FormInput
-            type='email'
-            name='email'
-            value={this.state.email}
-            handleChange={this.handleChange}
-            label='Email'
-            required
-          />
-          <FormInput
-            type='password'
-            name='password'
-            value={this.state.password}
-            handleChange={this.handleChange}
-            label='Password'
-            required
-          />
-          <FormInput
-            type='confirmPassword'
-            name='confirmPassword'
-            value={this.state.confirmPassword}
-            handleChange={this.handleChange}
-            label='Confirm Password'
-            required
-          />
-          <div className='buttons'>
-            <CustomButton type='submit'>Sign up</CustomButton>
-          </div>
-        </form>
-      </SignUpContainer>
-    );
-  }
-}
+  return (
+    <SignUpContainer>
+      <TitleContainer>I do not have an account.</TitleContainer>
+      <span>Sign up with your email and password</span>
+      <form onSubmit={handleSubmit}>
+        <FormInput
+          type='text'
+          name='displayName'
+          value={displayName}
+          handleChange={handleChange}
+          label='Display Name'
+          required
+        />
+        <FormInput
+          type='email'
+          name='email'
+          value={email}
+          handleChange={handleChange}
+          label='Email'
+          required
+        />
+        <FormInput
+          type='password'
+          name='password'
+          value={password}
+          handleChange={handleChange}
+          label='Password'
+          required
+        />
+        <FormInput
+          type='confirmPassword'
+          name='confirmPassword'
+          value={confirmPassword}
+          handleChange={handleChange}
+          label='Confirm Password'
+          required
+        />
+        <div className='buttons'>
+          <CustomButton type='submit'>Sign up</CustomButton>
+        </div>
+      </form>
+    </SignUpContainer>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => ({
   signUpStart: (creds) => dispatch(signUpStart(creds)),
