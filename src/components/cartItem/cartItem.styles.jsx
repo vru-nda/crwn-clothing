@@ -16,7 +16,7 @@ export const ItemDetailsContainer = styled.div`
   padding: 10px 20px;
 `;
 
-export const nameContainer = styled.span`
+export const NameContainer = styled.span`
   font-size: 16px;
 `;
 
