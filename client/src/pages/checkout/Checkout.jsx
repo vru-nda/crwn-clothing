@@ -28,7 +28,7 @@ const CheckoutPage = ({cartItems, total}) => {
           <span>Quantity</span>
         </HeaderBlockContainer>
         <HeaderBlockContainer>
-          <span>Price</span>
+          <span>Price(Rs.)</span>
         </HeaderBlockContainer>
         <HeaderBlockContainer>
           <span>Remove</span>
@@ -37,7 +37,7 @@ const CheckoutPage = ({cartItems, total}) => {
       {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
-      <TotalContainer>TOTAL: ${total}</TotalContainer>
+      <TotalContainer>TOTAL: Rs.{total}</TotalContainer>
       <WarningContainer>
         *Please use the following test credit card details for payments*
         <br />
