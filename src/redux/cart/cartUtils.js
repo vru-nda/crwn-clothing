@@ -1,6 +1,6 @@
 // Add quantiy or increment it
 export const addItemToCart = (cartItems, newCartItem) => {
-  const exists = cartItems.find((item) => item.id === newCartItem.id);
+  const exists = cartItems?.find((item) => item.id === newCartItem.id);
 
   if (exists) {
     return cartItems.map((item) =>
@@ -12,7 +12,7 @@ export const addItemToCart = (cartItems, newCartItem) => {
 };
 
 export const removeItemFromItem = (cartItems, cartItemToRemove) => {
-  const exists = cartItems.find((item) => item.id === cartItemToRemove.id);
+  const exists = cartItems?.find((item) => item.id === cartItemToRemove.id);
 
   if (exists && exists.qty === 1) {
     return cartItems.filter((item) => item.id !== cartItemToRemove.id);
@@ -22,3 +22,20 @@ export const removeItemFromItem = (cartItems, cartItemToRemove) => {
     );
   }
 };
+
+export const filterItemFromCart = (cartItems, itemToRemove) => {
+  return cartItems.filter((item) => item.id !== itemToRemove.id);
+};
+
+export const getCartItemsCount = (cartItems) =>
+  cartItems.reduce(
+    (accumalatedQty, cartItem) => accumalatedQty + cartItem.qty,
+    0
+  );
+
+export const getCartTotal = (cartItems) =>
+  cartItems.reduce(
+    (accumalatedQuantity, cartItem) =>
+      accumalatedQuantity + cartItem.qty * cartItem.price,
+    0
+  );

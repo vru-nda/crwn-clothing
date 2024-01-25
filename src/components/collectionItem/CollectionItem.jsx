@@ -1,13 +1,14 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React, {useContext} from 'react';
 
 import './collectionItem.scss';
 
+import {CartContext} from '../../providers/cart/cartProvider';
 import CustomButton from '../customButton/CustomButton';
-import {addCartItem} from '../../redux/cart/cartActions';
 
-const CollectionItem = ({item, addCartItem}) => {
+const CollectionItem = ({item}) => {
+  const {addItem} = useContext(CartContext);
   const {name, imageUrl, price} = item;
+
   return (
     <div className='collection-item'>
       <div className='image' style={{backgroundImage: `url(${imageUrl})`}} />
@@ -15,15 +16,11 @@ const CollectionItem = ({item, addCartItem}) => {
         <span className='name'>{name}</span>
         <span className='price'>{price}</span>
       </div>
-      <CustomButton inverted onClick={() => addCartItem(item)}>
+      <CustomButton inverted onClick={() => addItem(item)}>
         ADD TO CART
       </CustomButton>
     </div>
   );
 };
 
-const mapStateToDispatch = (dispatch) => ({
-  addCartItem: (item) => dispatch(addCartItem(item)),
-});
-
-export default connect(null, mapStateToDispatch)(CollectionItem);
+export default CollectionItem;

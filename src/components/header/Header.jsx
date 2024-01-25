@@ -9,15 +9,12 @@ import CartIcon from '../cartIcon/CartIcon';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
 import {auth} from '../../firebase/firebaseUtils';
 
-import CartContext from '../../context/cart/cartContext';
 import CurrentUserContext from '../../context/currentUser/currentUserContext';
+import {CartContext} from '../../providers/cart/cartProvider';
 
 const Header = () => {
   const currentUser = useContext(CurrentUserContext);
-
-  const [hidden, setHidden] = useState(true);
-
-  const toggleHidden = () => setHidden(!hidden);
+  const {hidden} = useContext(CartContext);
 
   return (
     <div className='header'>
@@ -40,9 +37,8 @@ const Header = () => {
             SIGN IN
           </Link>
         )}
-        <CartContext.Provider value={{hidden, toggleHidden}}>
-          <CartIcon />
-        </CartContext.Provider>
+
+        <CartIcon />
       </div>
       {!hidden && <CartDropDown />}
     </div>
