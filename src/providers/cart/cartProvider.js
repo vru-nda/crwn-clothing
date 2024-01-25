@@ -6,7 +6,7 @@ import {
   removeItemFromItem,
   getCartItemsCount,
   getCartTotal,
-} from '../../redux/cart/cartUtils';
+} from './cartUtils';
 
 export const CartContext = createContext({
   hidden: true,
