@@ -5,12 +5,12 @@ import {connect} from 'react-redux';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {createStructuredSelector} from 'reselect';
 
-import HomePage from './pages/homePage/HomePage';
-import ShopPage from './pages/shop/ShopPage';
+import HeaderContainer from './components/header/HeaderContainer';
 import AuthPage from './pages/authPage/AuthPage';
 import CheckoutPage from './pages/checkout/Checkout';
 import Contact from './pages/contact/Contact';
-import Header from './components/header/Header';
+import HomePage from './pages/homePage/HomePage';
+import ShopPage from './pages/shop/ShopPage';
 
 import {auth, createUserProfileDocument} from './firebase/firebaseUtils';
 
@@ -48,7 +48,7 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        <Header />
+        <HeaderContainer />
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
