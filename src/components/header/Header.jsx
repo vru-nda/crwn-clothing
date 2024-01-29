@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {createStructuredSelector} from 'reselect';
 
-import CartDropDown from '../cartDropdown/CartDropDown';
 import CartIconContainer from '../cartIcon/CartIconContainer';
+import CartDropDownContainer from '../cartDropdown/CartDropDownContainer';
 
 import {ReactComponent as Logo} from '../../assets/crown.svg';
 import {auth} from '../../firebase/firebaseUtils';
@@ -36,7 +36,7 @@ const Header = ({currentUser, hidden}) => {
         )}
         <CartIconContainer />
       </div>
-      {!hidden && <CartDropDown />}
+      {!hidden && <CartDropDownContainer />}
     </div>
   );
 };
