@@ -22,22 +22,22 @@ const CartDropDown = ({cartItems, history, dispatch}) => {
       <CartItemsContainer>
         {cartItems.length ? (
           cartItems.map((cartItem) => (
-            <CartItemsWrapper key={cartItem.id}>
+            <div key={cartItem.id}>
               <CartItem key={cartItem.id} cartItem={cartItem} />
-            </CartItemsWrapper>
+            </div>
           ))
         ) : (
           <EmptyMessage>Your cart is empty</EmptyMessage>
         )}
-        <CartDropdownButton
-          onClick={() => {
-            history.push('/checkout');
-            dispatch(toggleCartHidden());
-          }}
-        >
-          GO TO CHECKOUT
-        </CartDropdownButton>
       </CartItemsContainer>
+      <CartDropdownButton
+        onClick={() => {
+          history.push('/checkout');
+          dispatch(toggleCartHidden());
+        }}
+      >
+        GO TO CHECKOUT
+      </CartDropdownButton>
     </CartDropdownContainer>
   );
 };

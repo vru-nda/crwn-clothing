@@ -20,9 +20,6 @@ export const CartItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`;
-
-export const CartItemsWrapper = styled.div`
   overflow: auto;
 `;
 

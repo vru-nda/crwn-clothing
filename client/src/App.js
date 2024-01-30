@@ -1,5 +1,3 @@
-import './App.css';
-
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Redirect, Route, Switch} from 'react-router-dom';
@@ -15,6 +13,8 @@ import ShopPage from './pages/shop/ShopPage';
 import {checkUserSession} from './redux/user/userActions';
 import {selectCurrentUser} from './redux/user/userSelectors';
 
+import {GlobalStyle} from './globalStyles';
+
 const App = ({checkUserSession, currentUser}) => {
   // Check for signed in user with google account
   useEffect(() => {
@@ -23,6 +23,7 @@ const App = ({checkUserSession, currentUser}) => {
 
   return (
     <div className='App'>
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route exact path='/' component={HomePage} />

@@ -12,8 +12,8 @@ const ButtonStyles = css`
 `;
 
 export const InvertedButtonStyles = css`
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   border: 1px solid black;
 
   &:hover {
